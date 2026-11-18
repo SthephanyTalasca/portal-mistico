@@ -34,10 +34,12 @@ portal-mistico/
 ├─ vercel.json / netlify.toml # rotas da SPA
 ├─ .env.example               # variáveis de ambiente (modelo)
 ├─ public/                    # favicon, robots.txt (bloqueia /admin)
+│  └─ tiragens/               # imagens do modelo de cada tiragem (.webp)
 ├─ supabase/
 │  ├─ migrations/
 │  │  ├─ 20261117000001_schema.sql  # tabelas, RLS, storage, funções
-│  │  └─ 20261117000002_seed.sql    # baralho, categorias, 3 tiragens, FAQ
+│  │  ├─ 20261117000002_seed.sql    # baralho, categorias, 3 tiragens, FAQ
+│  │  └─ 20261118000001_novas_tiragens.sql # 11 tiragens (rascunho) + exemplos da Pergunta Objetiva
 │  └─ create_admin.sql        # transforma seu usuário em administradora
 └─ src/
    ├─ App.jsx                 # rotas

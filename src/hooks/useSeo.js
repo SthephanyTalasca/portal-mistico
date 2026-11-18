@@ -18,7 +18,8 @@ export function useSeo({ title, description, image, noindex } = {}) {
     const site = settings.oracle_name
     const fullTitle = title ? `${title} · ${site}` : settings.seo_title || site
     const desc = description || settings.seo_description || ''
-    const img = image || settings.og_image_url || ''
+    const raw = image || settings.og_image_url || ''
+    const img = raw.startsWith('/') ? window.location.origin + raw : raw
     document.title = fullTitle
     setMeta('name', 'description', desc)
     setMeta('property', 'og:title', fullTitle)
