@@ -14,7 +14,7 @@ on conflict (slug) do nothing;
 
 insert into public.spreads (
   name, slug, deck_id, category_id, price_cents,
-  short_description, full_description, questions, cover_url,
+  short_description, full_description, questions, gallery, service_format,
   status, featured, sort_order
 )
 select
@@ -25,7 +25,8 @@ select
   v.short_description,
   '**' || v.cards || '** · ' || v.short_description,
   v.questions,
-  '/tiragens/' || v.slug || '.webp',
+  array['/tiragens/' || v.slug || '.webp'],
+  'áudio pelo WhatsApp',
   'draft', false, v.sort_order
 from (values
   -- ♥ Amor e relacionamentos
@@ -167,5 +168,9 @@ set questions = array[
   'Estou insistindo em algo que já deveria ter terminado?',
   'O que preciso saber antes de tomar essa decisão?'
 ],
-full_description = 'Consulta direcionada a uma pergunta específica. Exemplos de perguntas:'
+full_description = case
+  when full_description = 'Consulta direcionada a uma pergunta específica.'
+  then 'Consulta direcionada a uma pergunta específica. Exemplos de perguntas:'
+  else full_description
+end
 where slug = 'pergunta-objetiva' and questions = '{}';
